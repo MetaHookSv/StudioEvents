@@ -61,13 +61,13 @@ install(FILES "$<TARGET_PDB_FILE:StudioEvents>" DESTINATION svencoop/metahook/pl
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/assets/svencoop/studioevents" DESTINATION svencoop)
 
 option(STUDIOEVENTS_SYNC_GAMEDATA "Download and prune StudioEvents' gamedata catalog before building" ON)
-set(STUDIOEVENTS_GAMEDATA_DIR "${CMAKE_BINARY_DIR}/assets/svencoop/metahook/gamedata/studioevents" CACHE PATH "StudioEvents gamedata catalog directory")
+set(STUDIOEVENTS_GAMEDATA_DIR "${PROJECT_BINARY_DIR}/assets/svencoop/metahook/gamedata/studioevents" CACHE PATH "StudioEvents gamedata catalog directory")
 if(STUDIOEVENTS_SYNC_GAMEDATA)
     find_package(Python3 REQUIRED COMPONENTS Interpreter)
     add_custom_target(StudioEventsGameData
         COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/scripts/sync-gamedata.py"
             --manifest "${CMAKE_CURRENT_SOURCE_DIR}/scripts/manifests/studioevents.json"
-            --target-dir "${STUDIOEVENTS_GAMEDATA_DIR}" --temp-root "${CMAKE_BINARY_DIR}/gamedata-sync"
+            --target-dir "${STUDIOEVENTS_GAMEDATA_DIR}" --temp-root "${PROJECT_BINARY_DIR}/gamedata-sync"
         COMMENT "Synchronizing and validating StudioEvents gamedata"
         VERBATIM)
     add_custom_target(StudioEventsGameDataValidate
