@@ -29,7 +29,7 @@ scripts\build-StudioEvents-x86-Debug.bat
 
 The scripts configure under `build/x86/<Configuration>` and install the DLL, PDB, gamedata, and whitelists under `install/x86/<Configuration>/svencoop/`. They do not deploy files into a local game installation.
 
-The first configure fetches a pinned MetaHook SDK, Capstone headers when needed, and a SHA256-verified VC-LTL 5.3.1 binary package in `thirdparty/cache`. The SDK is consumed without building the launcher. The explicit source list preserves the original 4 plugin compilation units and the SDK's `interface.cpp`, with C++20 and a static CRT. Capstone is not linked; its types are used through the MetaHook API.
+The first configure fetches the latest `main` of the MetaHook SDK, Capstone headers when needed, and a SHA256-verified VC-LTL 5.3.1 binary package in `thirdparty/cache`. The SDK is consumed without building the launcher. The explicit source list preserves the original 4 plugin compilation units and the SDK's `interface.cpp`, with C++20 and a static CRT. Capstone is not linked; its types are used through the MetaHook API.
 
 To use a local SDK, pass the repository root containing `include/metahook.h`, `include/HLSDK`, `include/Interface`, and `include/SourceSDK`:
 

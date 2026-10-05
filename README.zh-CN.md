@@ -29,7 +29,7 @@ scripts\build-StudioEvents-x86-Debug.bat
 
 脚本使用 `build/x86/<Configuration>` 构建目录，将 DLL、PDB、gamedata 和白名单安装到 `install/x86/<Configuration>/svencoop/`，不会自动部署到本机游戏目录。
 
-首次配置会获取固定 commit 的 MetaHook SDK、按需获取 Capstone 头文件，并在 `thirdparty/cache` 缓存经 SHA256 校验的 VC-LTL 5.3.1 包。SDK 仅作为输入，不构建启动器。显式源码清单保留原插件的 4 个编译单元和 SDK 的 `interface.cpp`，使用 C++20 和静态 CRT。Capstone 仅通过 MetaHook API 使用其类型，不链接 Capstone 库。
+首次配置会获取最新 `main` 的 MetaHook SDK、按需获取 Capstone 头文件，并在 `thirdparty/cache` 缓存经 SHA256 校验的 VC-LTL 5.3.1 包。SDK 仅作为输入，不构建启动器。显式源码清单保留原插件的 4 个编译单元和 SDK 的 `interface.cpp`，使用 C++20 和静态 CRT。Capstone 仅通过 MetaHook API 使用其类型，不链接 Capstone 库。
 
 使用本地 SDK 时，传入包含 `include/metahook.h`、`include/HLSDK`、`include/Interface` 和 `include/SourceSDK` 的仓库根目录：
 

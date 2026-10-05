@@ -165,7 +165,7 @@ The scripts configure, build and install, forwarding extra CMake arguments. Debu
 
 ### Dependencies
 
-- **MetaHook SDK**: fetched automatically at a pinned commit; pass `-DMETAHOOK_SOURCE_PATH=D:\MetaHook` or export the same environment variable to build against a local tree. The path is the repository root providing `include/metahook.h`, `include/HLSDK`, `include/Interface` and `include/SourceSDK`
+- **MetaHook SDK**: fetched automatically from the latest `main`; pass `-DMETAHOOK_SOURCE_PATH=D:\MetaHook` or export the same environment variable to build against a local tree. The path is the repository root providing `include/metahook.h`, `include/HLSDK`, `include/Interface` and `include/SourceSDK`
 - **Capstone headers**: resolve from `CAPSTONE_INCLUDE_DIRS`, else the SDK's `thirdparty/capstone_fork`, else a pinned checkout. Used only through the MetaHook API; **Capstone is not linked**
 - **VC-LTL 5.3.1**: downloaded once into `thirdparty/cache`, SHA256-verified
 - **MurmurHash2**: vendored in `src/`, public domain, not a build dependency
