@@ -258,6 +258,6 @@ Runtime data: `svencoop/studioevents/{sound_whitelist,sourcemodel_whitelist}.txt
 
 ## Related Links
 
-- **MetaHookSV**: https://github.com/hzqst/MetaHookSv
+- **MetaHookSV**: https://github.com/MetaHookSv/MetaHookSv
 - **Gamedata symbol catalog**: https://hlnd2t.github.io/GoldSrc_VibeSignatures/
 - **MurmurHash2**: https://github.com/aappleby/smhasher
