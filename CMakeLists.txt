@@ -52,7 +52,9 @@ target_compile_options(studioevents_settings INTERFACE /permissive
     /wd4311 /wd4312 /wd4819 /wd4996)
 
 include(cmake/Sources.cmake)
+include(cmake/SourceGroups.cmake)
 add_library(StudioEvents SHARED ${STUDIOEVENTS_SOURCES})
+studioevents_assign_source_groups(StudioEvents)
 target_link_libraries(StudioEvents PRIVATE studioevents_settings)
 target_compile_options(StudioEvents PRIVATE /MP /Zi)
 target_link_options(StudioEvents PRIVATE /DEBUG /SUBSYSTEM:WINDOWS
