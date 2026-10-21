@@ -256,6 +256,14 @@ Runtime data: `svencoop/studioevents/{sound_whitelist,sourcemodel_whitelist}.txt
 - The empty entry points (`Engine_FillAddress`, `Engine_InstallHooks`, `EngineStudio_InstalHooks`, `ExitGame`, `Shutdown`) and the mirror-image / `ConvertDllInfoSpace` scaffolding are inherited leftovers. Do not assume they run, and do not delete them as part of an unrelated change
 - Verification distinguishes build checks from a real game run: there is no test suite here, so a successful configure/build says nothing about whether a sound is filtered or a delayed sound is replayed at runtime. Claims about in-game behavior must not be made without evidence. Documentation changes need content, path and format checks, not a plugin rebuild
 
+## C/C++ formatting
+
+Owned C/C++ sources use the shared DiligentCore style from
+[MetaHookSv/FormatValidation](https://github.com/MetaHookSv/FormatValidation), pinned
+to clang-format 23.1.3. Setup, commands and the checked scope are recorded in
+`memory/CppFormatting.md` (`CppFormatting`). Do not hand-edit the generated
+`.clang-format`; change the shared style. Keep MSVC inline assembly in explicit blocks.
+
 ## Related Links
 
 - **MetaHookSV**: https://github.com/MetaHookSv/MetaHookSv
