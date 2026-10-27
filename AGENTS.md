@@ -28,15 +28,13 @@ StudioEvents/
 ├── cmake/
 │   ├── Sources.cmake          # Explicit compile list (4 plugin units + the SDK's interface.cpp)
 │   ├── Dependencies.cmake     # Source-path resolution and FetchContent fallback
-│   ├── LaunchGame.cmake       # Optional F5 deploy support
-│   └── VCLTL.cmake            # VC-LTL 5.3.1
+│   └── LaunchGame.cmake       # Optional F5 deploy support
 ├── scripts/
 │   ├── build-StudioEvents-x86-{Debug,Release}.bat
 │   ├── manifests/studioevents.json     # Gamedata manifest (one engine global)
 │   ├── sync-gamedata.py                # Prunes the upstream catalog into the build tree
 │   └── validate-gamedata.py            # Validates it before the plugin target builds
 ├── docs/en/, docs/zh-CN/      # Bilingual features.md and debugging.md; docs/img/8.png screenshot
-├── thirdparty/cache/          # Ignored VC-LTL binary cache
 ├── build/x86/<configuration>/    # Ignored build output
 ├── install/x86/<configuration>/  # Ignored install output
 ├── README.md, README.zh-CN.md # Bilingual install / build documentation
@@ -154,7 +152,7 @@ Intervals apply to one shared playback history, including events from different 
 
 ## Build Instructions
 
-Requirements: Windows, Visual Studio 2022 with C++ tools, CMake 3.21 or newer, Git, Python 3.8 or newer, MSVC x86 (`-A Win32`), C++20 (`cxx_std_20`), static CRT (`MultiThreaded`), `_MBCS`, `NO_MALLOC_OVERRIDE` and VC-LTL 5.3.1.
+Requirements: Windows, Visual Studio 2022 with C++ tools, CMake 3.21 or newer, Git, Python 3.8 or newer, MSVC x86 (`-A Win32`), C++20 (`cxx_std_20`), static CRT (`MultiThreaded`), `_MBCS` and `NO_MALLOC_OVERRIDE`.
 
 ```bat
 scripts\build-StudioEvents-x86-Release.bat
@@ -167,7 +165,6 @@ The scripts configure, build and install, forwarding extra CMake arguments. Debu
 
 - **MetaHook SDK**: fetched automatically from the latest `main`; pass `-DMETAHOOK_SOURCE_PATH=D:\MetaHook` or export the same environment variable to build against a local tree. The path is the repository root providing `include/metahook.h`, `include/HLSDK`, `include/Interface` and `include/SourceSDK`
 - **Capstone headers**: resolve from `CAPSTONE_INCLUDE_DIRS`, else the SDK's `thirdparty/capstone_fork`, else a pinned checkout. Used only through the MetaHook API; **Capstone is not linked**
-- **VC-LTL 5.3.1**: downloaded once into `thirdparty/cache`, SHA256-verified
 - **MurmurHash2**: vendored in `src/`, public domain, not a build dependency
 
 Keep `cmake/Sources.cmake` as the explicit compile list (4 plugin units); `include/HLSDK/common/interface.cpp` is compiled in because `EXPOSE_SINGLE_INTERFACE` (which exports `CreateInterface`) lives there.
@@ -252,7 +249,7 @@ Runtime data: `svencoop/studioevents/{sound_whitelist,sourcemodel_whitelist}.txt
 - CVar names, defaults and flags, the whitelist paths and the delayed-replay behavior are user-visible contracts: change them together with `README.md` / `README.zh-CN.md` and the feature pages
 - When gamedata usage changes, update `scripts/manifests/studioevents.json` in the same change
 - Do not modify external or third-party sources. MetaHook and Capstone are read-only build inputs; MurmurHash2 keeps its public-domain notice
-- MSVC x86 only. Keep the static CRT / VC-LTL and C++20 (`cxx_std_20`) settings in `CMakeLists.txt` in sync with the other standalone plugin repositories
+- MSVC x86 only. Keep the static CRT and C++20 (`cxx_std_20`) settings in `CMakeLists.txt` in sync with the other standalone plugin repositories
 - The empty entry points (`Engine_FillAddress`, `Engine_InstallHooks`, `EngineStudio_InstalHooks`, `ExitGame`, `Shutdown`) and the mirror-image / `ConvertDllInfoSpace` scaffolding are inherited leftovers. Do not assume they run, and do not delete them as part of an unrelated change
 - Verification distinguishes build checks from a real game run: there is no test suite here, so a successful configure/build says nothing about whether a sound is filtered or a delayed sound is replayed at runtime. Claims about in-game behavior must not be made without evidence. Documentation changes need content, path and format checks, not a plugin rebuild
 

@@ -21,7 +21,6 @@ endif()
 
 include(cmake/Dependencies.cmake)
 studioevents_prepare_dependencies()
-include("${VC_LTL_Root}/VC-LTL helper for cmake.cmake")
 
 # Include directories and definitions follow StudioEvents.vcxproj.
 add_library(studioevents_settings INTERFACE)
